@@ -30,17 +30,32 @@
             <div class="col-md-4">
                 <div class="card card-primary card-outline">
                     <div class="card-header text-center">
-                        <h3 id="reg">Nuevo tienda</h3>
-                        <h3 id="act" style="display: none">Actualizar tienda</h3>
+                        <h3 id="reg">Nuevo producto</h3>
+                        <h3 id="act" style="display: none">Actualizar producto</h3>
                     </div>
                     <div class="card-body">
-                        <form id="formtienda">
+                        <form id="formproducto">
                             <div class="form-group">
-                                <input type="text" name="tname" id="tname" class="form-control" placeholder="Ingrese el nombre de la tienda">
+                                <input type="text" name="pname" id="pname" class="form-control" placeholder="Ingrese el nombre del producto">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="tfecha" id="tfecha" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Ingrese fecha">
+                                <textarea name="pdescripcion" id="pdescripcion" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" name="pvalor" id="pvalor" class="form-control" placeholder="Ingrese valor">
+                            </div>
+                            <div class="form-group">
+                                <select name="ptiendas" id="ptiendas" class="form-control">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($tiendas as $tienda) : ?>
+                                        <option value="<?php echo $tienda['id'] ?>">
+                                            <?php echo $tienda['nombre'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" name="pimagen" id="pimagen" class="form-control" placeholder="Ingrese valor">
                             </div>
                             <div id="divmsj-tienda" class="form-group text-danger" style="display: none">
                                 <label id="lbltienda">* Ingrese los datos requeridos</label>

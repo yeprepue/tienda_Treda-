@@ -1,20 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ctienda extends CI_Controller {
+class Cproducto extends CI_Controller {
 
 	function __construct()
     {
         parent::__construct();
+        // $this->load->model('mproducto');
         $this->load->model('mtienda');
     }
 	
 	public function index()
 	{
-		// var_dump($this->mtienda->consultarTienda());
-		// exit;
-		$data["tiendas"] = $this->mtienda->consultarTienda();
-		$this->load->view('admin/dashboard', $data);
+        $data["tiendas"] = $this->mtienda->consultarTienda();
+        $data["productos"] = $this->mproducto->consultarProductos();
+		$this->load->view('admin/productos', $data);
 	}
 
 	public function crearTienda()
