@@ -7,19 +7,19 @@ class Mtienda extends CI_Model
         parent::__construct();
     }
 
-    public function consultarTienda($tienda)
+    public function consultarTienda()
     {
-        $tienda = array(
-            
-            'nombre' => $tienda
-            
-        );
+        $this->db->select('*');
+        $this->db->from('tienda');
 
-        $this->db->select('tienda', $tienda);
-        if ($this->db->affected_rows()) {
-            return true;
+        $res = $this->db->get();
+
+        if ($res->num_rows() > 0) {
+            $result = $res->result_array();
+            return $result;
+        } else {
+            return false;
         }
-        return false;
     }
 
 
