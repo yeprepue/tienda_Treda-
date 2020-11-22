@@ -6,30 +6,36 @@ class Cproducto extends CI_Controller {
 	function __construct()
     {
         parent::__construct();
-        // $this->load->model('mproducto');
-        $this->load->model('mtienda');
+         $this->load->model('mproducto');
+         $this->load->model('mtienda');
     }
 	
 	public function index()
 	{
+        $data["productos"] = $this->mproducto->consultarProducto();
         $data["tiendas"] = $this->mtienda->consultarTienda();
-        $data["productos"] = $this->mproducto->consultarProductos();
+        
 		$this->load->view('admin/productos', $data);
 	}
 
-	public function crearTienda()
+	public function crearProducto()
     {
-		$tienda = $this->input->post('tname');
-		$fecha = $this->input->post('tfecha');
+        
+        $nombre  = $this->input->post('nombre');
+        $pdescripcion = $this->textarea->post('pdescripcion');
+        $pvalor = $this->input->post('pvalor');
+        $ptienda = $this->input->post('ptienda');
+        $imagen = $this->input->post('imagen');
+        
 		
-		$res = $this->mtienda->crearTienda($tienda, $fecha);
+		$res = $this->mproducto->crearProducto( $nombre,$pdescripcion,$pvalor,$ptienda, $imagen);
         if ($res) {
-			$tiendas = $this->mtienda->consultarTienda();
+			$productos = $this->mproducto->consultarProducto();
             echo json_encode(
                 array(
                     "status" => 200,
 					"msj" => "Registrado correctamente",
-					"data" => $tiendas
+					"data" => $productos
                 )
             );
         } else {
@@ -40,19 +46,23 @@ class Cproducto extends CI_Controller {
 	}
 	
 
-	public function actualizarTienda()
+	public function actualizarProductos()
     {
-		$idtienda = $this->input->post('idtienda');
-		$tname = $this->input->post('tname');
-		$tfecha = $this->input->post('tfecha');
-        $res = $this->mtienda->actualizarTienda($idtienda, $tname,$tfecha);
+        $sku  = $this->input->post('sku');
+        $nombre  = $this->input->post('nombre');
+        $pdescripcion = $this->textarea->post('pdescripcion');
+        $pvalor = $this->input->post('pvalor');
+        $ptienda = $this->input->post('ptienda');
+        $imagen = $this->input->post('imagen');
+
+        $res = $this->mproducto->actualizarProducto($sku, $nombre, $pdescripcion, $pvalor,$ptienda,$imagen);
         if ($res) {
-            $tiendas = $this->mtienda->consultarTienda();
+            $productos = $this->mproducto->consultarProducto();
             echo json_encode(
                 array(
                     "status" => 200,
 					"msj" => "Actualizado correctamente",
-					"data" => $tiendas
+					"data" => $productos
                 )
             );
         } else {
@@ -62,17 +72,17 @@ class Cproducto extends CI_Controller {
         }
 	}
 	
-	public function eliminarTienda()
+	public function eliminarProducto()
     {
-		$idtienda = $this->input->post('idtienda');
-        $res = $this->mtienda->eliminarTienda($idtienda);
+		$sku = $this->input->post('sku');
+        $res = $this->mtienda->eliminarTienda($sku);
         if ($res) {
-            $tiendas = $this->mtienda->consultarTienda();
+            $productos = $this->mproducto->consultarProducto();
             echo json_encode(
                 array(
                     "status" => 200,
 					"msj" => "Eliminada correctamente",
-					"data" => $tiendas
+					"data" => $productos
                 )
             );
         } else {

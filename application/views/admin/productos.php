@@ -57,37 +57,42 @@
                             <div class="form-group">
                                 <input type="file" name="pimagen" id="pimagen" class="form-control" placeholder="Ingrese valor">
                             </div>
-                            <div id="divmsj-tienda" class="form-group text-danger" style="display: none">
-                                <label id="lbltienda">* Ingrese los datos requeridos</label>
+                            <div id="divmsj-productos" class="form-group text-danger" style="display: none">
+                                <label id="lblproducto">* Ingrese los datos requeridos</label>
                             </div>
                             <div class="form-group">
                                 <button id="btnGuardar" type="button" class="btn btn-success btn-block">Guardar</button>
                                 <button id="btnActualizar" style="display: none" type="button" class="btn btn-success btn-block">Actualizar</button>
                             </div>
                         </form>
-                        <input type="hidden" name="idtienda" id="idtienda">
+                        <input type="hidden" name="sku" id="sku">
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <section>
                     <div class="container">
-                        <table class="table" id="tblTiendas">
+                        <table class="table table-responsive" id="tblProductos">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">SKU</th>
                                     <th scope="col">NOMBRE</th>
-
-                                    <th scope="col">Fecha de apertua</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col">DESCRIPCION</th>
+                                    <th scope="col">VALOR</th>
+                                    <th scope="col">TIENDA</th>
+                                    <th scope="col">IMAGEN</th>
+                                    <th scope="col">ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($tiendas as $activas) : ?>
+                                <?php foreach ($productos as $activas) : ?>
                                     <tr>
-                                        <td> <?php echo $activas['id'] ?></td>
+                                        <td> <?php echo $activas['sku'] ?></td>
                                         <td> <?php echo $activas['nombre'] ?></td>
-                                        <td> <?php echo $activas['fecha_apertura'] ?></td>
+                                        <td> <?php echo $activas['description'] ?></td>
+                                        <td> <?php echo $activas['valor'] ?></td>
+                                        <td> <?php echo $activas['tienda '] ?></td>
+                                        <td> <?php echo $activas['imagen'] ?></td>
                                         <td>
                                             <button class="btn btn-success btn-sm btn-edt">Editar</button>
                                             <button class="btn btn-danger btn-sm btn-desac">Eliminar</button>
@@ -104,7 +109,7 @@
 
     <script src="http://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/tiendas.js"></script>
+    <script src="<?php echo base_url(); ?>js/productos.js"></script>
 </body>
 
 </html>
