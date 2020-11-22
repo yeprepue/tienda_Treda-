@@ -9,18 +9,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">TIENDA</a>
+    <nav class="navbar navbar-expand-lg navbar-info bg-light py-4">
+        <a class="navbar-brand" href=""><img src="<?php echo base_url(); ?>imagenes/carretilla.png" alt="...."  width="50" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Productos<span class="sr-only">(current)<span></a>
+                
+                    <a class="nav-link" href="<?php echo base_url(); ?>cproducto">Productos<span class="sr-only">(current)<span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tiendas</a>
+                    <a class="nav-link" href="<?php echo base_url(); ?>ctienda">Tiendas</a>
                 </li>
             </ul>
         </div>
@@ -28,10 +29,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-primary card-outline">
+                <div class="card card-primary card-outline py-4">
                     <div class="card-header text-center">
-                        <h3 id="reg">Nuevo tienda</h3>
-                        <h3 id="act" style="display: none">Actualizar tienda</h3>
+                        <h3 id="reg">AGREGAR TIENDA</h3>
+                        <h3 id="act" style="display: none">ACTUALIZAR TIENDA</h3>
                     </div>
                     <div class="card-body">
                         <form id="formtienda">
@@ -54,15 +55,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 py-4">
                 <section>
                     <div class="container">
-                        <table class="table" id="tblTiendas">
-                            <thead class="thead-dark">
+                        <h2>TIENDAS</h2>
+                        <table class="table table-bordered" id="tblTiendas">
+                            <thead>
                                 <tr>
                                     <th scope="col">SKU</th>
                                     <th scope="col">NOMBRE</th>
-
                                     <th scope="col">Fecha de apertua</th>
                                     <th scope="col">Acciones</th>
                                 </tr>

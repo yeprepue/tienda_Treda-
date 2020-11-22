@@ -9,71 +9,72 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">TIENDA</a>
+    <nav class="navbar navbar-expand-lg navbar-info bg-light">
+        <a class="navbar-brand" href="#"><img src="<?php echo base_url(); ?>imagenes/carretilla.png" alt="...." width="50" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Productos<span class="sr-only">(current)<span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tiendas</a>
-                </li>
+            <li class="nav-item active">                
+                <a class="nav-link" href="<?php echo base_url(); ?>cproducto">Productos<span class="sr-only">(current)<span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url(); ?>ctienda">Tiendas</a>
+            </li>
             </ul>
         </div>
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 py-4">
                 <div class="card card-primary card-outline">
                     <div class="card-header text-center">
-                        <h3 id="reg">Nuevo producto</h3>
-                        <h3 id="act" style="display: none">Actualizar producto</h3>
+                        <h3 id="reg">AGREGAR PRODUCTO</h3>
+                        <h3 id="act" style="display: none">ACTUALIZAR PRODUCTO</h3>
                     </div>
                     <div class="card-body">
-                        <form id="formproducto">
-                            <div class="form-group">
-                                <input type="text" name="pname" id="pname" class="form-control" placeholder="Ingrese el nombre del producto">
-                            </div>
-                            <div class="form-group">
-                                <textarea name="pdescripcion" id="pdescripcion" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" name="pvalor" id="pvalor" class="form-control" placeholder="Ingrese valor">
-                            </div>
-                            <div class="form-group">
-                                <select name="ptiendas" id="ptiendas" class="form-control">
-                                    <option value="">Seleccione</option>
-                                    <?php foreach ($tiendas as $tienda) : ?>
-                                        <option value="<?php echo $tienda['id'] ?>">
-                                            <?php echo $tienda['nombre'] ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="file" name="pimagen" id="pimagen" class="form-control" placeholder="Ingrese valor">
-                            </div>
-                            <div id="divmsj-productos" class="form-group text-danger" style="display: none">
-                                <label id="lblproducto">* Ingrese los datos requeridos</label>
-                            </div>
-                            <div class="form-group">
-                                <button id="btnGuardar" type="button" class="btn btn-success btn-block">Guardar</button>
-                                <button id="btnActualizar" style="display: none" type="button" class="btn btn-success btn-block">Actualizar</button>
-                            </div>
-                        </form>
+                        <?php echo form_open_multipart('cproducto/crearProducto'); ?>
+                        <div class="form-group">
+                            <input type="text" name="pname" id="pname" class="form-control" placeholder="Ingrese el nombre del producto">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="pdescripcion" id="pdescripcion" class="form-control" placeholder="Ingrese una breve descripción"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="pvalor" id="pvalor" class="form-control" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <select name="ptienda" id="ptienda" class="form-control">
+                                <option value="">Seleccione</option>
+                                <?php foreach ($tiendas as $tienda) : ?>
+                                    <option value="<?php echo $tienda['id'] ?>">
+                                        <?php echo $tienda['nombre'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group py-2">
+                            <input type="file" name="pimagen" id="pimagen" class="form-control">
+                        </div>
+                        <div id="divmsj-productos" class="form-group text-danger" style="display: none">
+                            <label id="lblproducto">* Ingrese los datos requeridos</label>
+                        </div>
+                        <div class="form-group">
+                            <button id="btnGuardar" type="submit" class="btn btn-success btn-block">Guardar</button>
+                            <button id="btnActualizar" style="display: none" type="submit" class="btn btn-success btn-block">Actualizar</button>
+                        </div>
                         <input type="hidden" name="sku" id="sku">
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <section>
                     <div class="container">
-                        <table class="table table-responsive" id="tblProductos">
-                            <thead class="thead-dark">
+                        <h2>PRODUCTOS</h2>
+                        <table class="table table-bordered py-4" id="tblProductos">
+                            <thead>
                                 <tr>
                                     <th scope="col">SKU</th>
                                     <th scope="col">NOMBRE</th>
@@ -91,11 +92,12 @@
                                         <td> <?php echo $activas['nombre'] ?></td>
                                         <td> <?php echo $activas['description'] ?></td>
                                         <td> <?php echo $activas['valor'] ?></td>
-                                        <td> <?php echo $activas['tienda '] ?></td>
-                                        <td> <?php echo $activas['imagen'] ?></td>
+                                        <td style="display: none"> <?php echo $activas['idtienda'] ?></td>
+                                        <td> <?php echo $activas['tienda'] ?></td>
+                                        <td> <img src="<?php echo base_url() ?>uploads/<?php echo $activas['imagen'] ?>" alt="" width="100px"> </td>
                                         <td>
-                                            <button class="btn btn-success btn-sm btn-edt">Editar</button>
-                                            <button class="btn btn-danger btn-sm btn-desac">Eliminar</button>
+                                            <button class="btn btn-success btn-lg btn-edt py-2">Editar</button>
+                                            <button class="btn btn-danger btn-lg btn-desac py-2">Eliminar</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

@@ -9,10 +9,10 @@ class Mproducto extends CI_Model
 
     public function consultarProducto()
     {
-        $this->db->select('p.sku, p.nombre, p.description, p.valor, t.nombre');
+        $this->db->select('p.sku, p.nombre, p.description, p.valor,, t.id as idtienda, t.nombre as tienda, p.imagen');
         $this->db->from('producto p');
-        $this->db->join('tienda t ');
-        $this->db->join('t.sku=p.idtienda');
+        $this->db->join('tienda t', 't.id=p.tienda');
+        // $this->db->join('t.sku=p.idtienda');
         
         $res = $this->db->get();
 

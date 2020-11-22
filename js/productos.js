@@ -1,15 +1,19 @@
 _producto = (function () {
-    let url = location.protocol + "//" + location.host + "/producto/";
+    let url = location.protocol + "//" + location.host + "/tienda/";
 
     var cargarTabla = function (data) {
+        debugger;
         $("#tblProductos tbody").empty();
         data.data.forEach(function (producto, i) {
-            $("#tblTiendas tbody").append(`
+            $("#tblProductos tbody").append(`
                         <tr>
                         <td>`+ producto.sku + `</td>
                         <td>`+ producto.nombre + `</td>
-                        <td>`+ producto.description+ `</td>
-                        <td>`+ producto.imagen+ `</td>
+                        <td>`+ producto.description + `</td>
+                        <td>`+ producto.valor + `</td>
+                        <td style="display:none">`+ producto.idtienda + `</td>
+                        <td>`+ producto.tienda + `</td>
+                        <td>`+ producto.imagen + `</td>
                         <td> <button class="btn btn-success btn-sm btn-edt">Editar</button>
                         <button class="btn btn-danger btn-sm btn-desac">Eliminar</button></td>
                         </tr>
@@ -20,11 +24,14 @@ _producto = (function () {
     var crearProducto = function () {
 
         var formulario = $("#formproducto").serialize();
-
+        var formData = new FormData();
+        var files = $('#pimagen')[0].files[0];
+        formData.append('file', files);
+        debugger;
         $.ajax({
             url: url + "cproducto/crearProducto",
             type: "post",
-            data: formulario,
+            data: formData,
             cache: false,
             success: function (request, textStatus, jQxhr) {
                 debugger;
@@ -39,7 +46,7 @@ _producto = (function () {
                     $("#pdescripcion").val("");
                     $("#pvalor").val("");
                     $("#ptiendas").val("");
-                    $("#pimagen").val("");                    
+                    $("#pimagen").val("");
                     cargarTabla(data);
                 }
             },
@@ -50,7 +57,7 @@ _producto = (function () {
         });
     };
 
-  
+
 
     var actualizarProductos = function () {
         var parametros = {
@@ -98,8 +105,9 @@ _producto = (function () {
 
     var eliminarProducto = function (sku) {
         var parametros = {
-            sku: sku,
+            sku: $.trim(sku),
         };
+        debugger;
         $.ajax({
             url: url + "cproducto/eliminarProducto",
             type: "post",
@@ -123,37 +131,11 @@ _producto = (function () {
     };
     return {
         crearProducto: crearProducto,
-       
         actualizarProductos: actualizarProductos,
         eliminarProducto: eliminarProducto,
     };
 })();
 
-$("#btnGuardar")
-    .off("click")
-    .on("click", function () {
-        if ($("#pname").val() == "" || $("#pdescripcion").val() == ""|| $("#pvalor").val() == ""||$("#ptiendas").val() == ""||$("#pimagen").val() == "") {
-            $("#divmsj-productos").show();
-            setTimeout(() => {
-                $("#divmsj-productos").hide();
-            }, 3000);
-        } else {
-            pro.crearTienda();
-        }
-    });
-
-$("#btnActualizar")
-    .off("click")
-    .on("click", function () {
-        if ($("#pname").val() == "" || $("#pdescripcion").val() == ""|| $("#pvalor").val() == ""||$("#ptiendas").val() == ""||$("#pimagen").val() == "")  {
-            $("#divmsj-tienda").show();
-            setTimeout(() => {
-                $("#divmsj-tienda").hide();
-            }, 3000);
-        } else {
-            _producto.actualizarProducto();
-        }
-    });
 $(document).ready(function () {
     // _tienda.consultarCategorias(false);
 });
@@ -167,7 +149,6 @@ $(document)
             .each(function (index) {
                 info[index] = $(this).html();
             });
-        debugger;
         $("#reg").hide();
         $("#act").show();
         $("#btnGuardar").hide();
@@ -175,8 +156,12 @@ $(document)
         $("#pname").val($.trim(info[1]));
         $("#pdescripcion").val($.trim(info[2]));
         $("#pvalor").val($.trim(info[3]));
-        $("#ptiendas").val($.trim(info[4]));
-        $("#pimagen").val($.trim(info[5]));
+        $("#ptienda option[value=" + $.trim(info[4]) + "]").prop(
+			"selected",
+			"selected"
+		);
+
+        debugger;
         //Acá había una error
         $("#sku").val($.trim(info[0]));
         $("#sku").focus();
