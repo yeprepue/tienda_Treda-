@@ -17,6 +17,6 @@ https://github.com/yeprepue/tienda_Treda-.git
 • Buscar una carpeta llamada “base_datos”  C:\xampp\htdocs\tienda\base_datos ; Contenedora de Query que se debe ejecutar en
 MYSQL,  http://localhost / 127.0.0.1 | phpMyAdmin 5.0.2 .
 Creara la base de datos “tienda” necesaria para la aplicación. 
-• Ingresar a la siguiente ruta para configurar C:\xampp\htdocs\tienda\application\config, los parámetros de conexión de nuestra base de datos con la aplicación por medio del código y e servidor de aplicaciones xammp. 
+• Ingresar a la siguiente ruta para configurar C:\xampp\htdocs\tienda\application\database.php, los parámetros de conexión de nuestra base de datos con la aplicación por medio del código y e servidor de aplicaciones xammp. 
 Ingresar http://localhost /Tienda
 
